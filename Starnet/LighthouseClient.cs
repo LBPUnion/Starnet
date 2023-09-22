@@ -34,6 +34,9 @@ public class LighthouseClient : IDisposable
         }
     }
 
+    /// <summary>
+    ///     Releases all resources used by the current instance of the <see cref="LighthouseClient" /> class.
+    /// </summary>
     public void Dispose()
     {
         this.httpClient.Dispose();
