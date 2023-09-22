@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using JetBrains.Annotations;
-using LBPUnion.Starnet.Entities;
+using LBPUnion.Starnet.Types.Entities.Users;
 
 namespace LBPUnion.Starnet;
 
@@ -68,6 +68,42 @@ public class LighthouseClient : IDisposable
 
         // Return the user, or null if the user is null.
         return user ?? null;
+    }
+
+    /// <summary>
+    /// Gets a user's status from the server.
+    /// </summary>
+    /// <param name="userId">Numerical ID of the user on the server.</param>
+    /// <returns>Deserialized UserStatusEntity</returns>
+    public async Task<UserStatusEntity?> GetUserStatusAsync(int userId)
+    {
+        // Get the user from the API.
+        HttpResponseMessage userStatusReq = await this.httpClient.GetAsync($"user/{userId}/status");
+        if (!userStatusReq.IsSuccessStatusCode) return null; // Return null if the request failed.
+
+        // Deserialize the user.
+        UserStatusEntity? userStatus = JsonSerializer.Deserialize<UserStatusEntity>(await userStatusReq.Content.ReadAsStringAsync());
+
+        // Return the user, or null if the user is null.
+        return userStatus ?? null;
+    }
+
+    /// <summary>
+    /// Gets a list of users from the server based on a query.
+    /// </summary>
+    /// <param name="query">String search query.</param>
+    /// <returns>List of deserialized UserEntities</returns>
+    public async Task<List<UserEntity?>?> SearchUsersAsync(string query)
+    {
+        // Get the list of user results from the API.
+        HttpResponseMessage userSearchReq = await this.httpClient.GetAsync($"search/user?query={query}");
+        if (!userSearchReq.IsSuccessStatusCode) return null; // Return null if the request failed.
+
+        // Deserialize the list of users.
+        List<UserEntity?>? users = JsonSerializer.Deserialize<List<UserEntity?>>(await userSearchReq.Content.ReadAsStringAsync());
+        
+        // Return the list of users, or null if the list is null.
+        return users ?? null;
     }
 
     #endregion

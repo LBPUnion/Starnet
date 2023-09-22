@@ -1,11 +1,11 @@
 ﻿#nullable disable
-
-using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 using JetBrains.Annotations;
+using LBPUnion.Starnet.Types.Enums;
 
-namespace LBPUnion.Starnet.Entities;
+namespace LBPUnion.Starnet.Types.Entities.Users;
 
+[PublicAPI]
 [Serializable]
 public class UserEntity
 {
@@ -53,35 +53,4 @@ public class UserEntity
 
     [JsonPropertyName("permissionLevel")]
     public PermissionLevel PermissionLevel { get; set; }
-}
-
-[Serializable]
-public class Location
-{
-    [JsonPropertyName("x")]
-    public int X { get; set; }
-
-    [JsonPropertyName("y")]
-    public int Y { get; set; }
-}
-
-[SuppressMessage("ReSharper", "InconsistentNaming")]
-[SuppressMessage("ReSharper", "UnusedMember.Global")]
-public enum PrivacyType
-{
-    PSN = 0,
-    Game = 1,
-    All = 2,
-}
-
-[SuppressMessage("ReSharper", "InconsistentNaming")]
-[SuppressMessage("ReSharper", "UnusedMember.Global")]
-public enum PermissionLevel
-{
-    Banned = -3,
-    Restricted = -2,
-    Silenced = -1,
-    Default = 0,
-    Moderator = 1,
-    Administrator = 2,
 }
