@@ -60,11 +60,21 @@ public class UserRequestTests
     }
 
     [Fact]
-    public async Task UserRequests_ThrowExceptionWhenAuthenticatingWithInvalidKey()
+    public async Task UserRequests_InviteTokenThrowOnRegistrationIssue()
     {
         await Assert.ThrowsAsync<ApiRegistrationException>(async () =>
         {
             await this.client.CreateUserInviteTokenAsync("littlebigmolly");
+        });
+    }
+
+    [Fact]
+    public async Task UserRequests_InviteTokenThrowOnAuthenticationIssue()
+    {
+        await Assert.ThrowsAsync<ApiAuthenticationException>(async () =>
+        {
+            LighthouseClient badClient = new("bad-token", "https://lnfinite.site");
+            await badClient.CreateUserInviteTokenAsync("Qo_Toyo_oQ");
         });
     }
 }
