@@ -7,7 +7,7 @@
 
     <PropertyGroup>
         <Title>Starnet</Title>
-        <Version>1.0.0</Version>
+        <Version>1.0.1</Version>
         <Authors>LBP Union</Authors>
         <Description>Starnet is a .NET library for interacting with ProjectLighthouse instance APIs.</Description>
         <Copyright>LBP Union</Copyright>
