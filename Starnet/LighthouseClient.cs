@@ -193,7 +193,11 @@ public class LighthouseClient : IDisposable
             case 403:
                 throw new ApiAuthenticationException("The client is not authenticated, or the API key is invalid.");
             case 404:
-                throw new ApiRegistrationException("Registration is not enabled on this server, or the API key is invalid.");
+                if (this.httpClient.DefaultRequestHeaders.Authorization != null)
+                {
+                    throw new ApiRegistrationException("Registration is not enabled on this server, or the API key is invalid.");
+                }
+                throw new ApiAuthenticationException("The client is not authenticated, or the API key is invalid.");
         }
 
         // Handle any other errors.

@@ -64,7 +64,8 @@ public class UserRequestTests
     {
         await Assert.ThrowsAsync<ApiRegistrationException>(async () =>
         {
-            await this.client.CreateUserInviteTokenAsync("littlebigmolly");
+            LighthouseClient badRegistrationClient = new("bad-registration");
+            await badRegistrationClient.CreateUserInviteTokenAsync("littlebigmolly");
         });
     }
 
@@ -73,8 +74,8 @@ public class UserRequestTests
     {
         await Assert.ThrowsAsync<ApiAuthenticationException>(async () =>
         {
-            LighthouseClient badClient = new("bad-token", "https://lnfinite.site");
-            await badClient.CreateUserInviteTokenAsync("Qo_Toyo_oQ");
+            LighthouseClient badAuthenticationClient = new("bad-token", "https://lnfinite.site");
+            await badAuthenticationClient.CreateUserInviteTokenAsync("Qo_Toyo_oQ");
         });
     }
 }
