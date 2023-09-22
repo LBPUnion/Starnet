@@ -20,6 +20,11 @@ public class LighthouseClient : IDisposable
     /// </summary>
     private readonly HttpClient httpClient = new();
 
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="LighthouseClient" /> class.
+    /// </summary>
+    /// <param name="authenticationKey">(optional) API authentication token.</param>
+    /// <param name="host">(optional) Web address of the host.</param>
     public LighthouseClient([Optional] string? authenticationKey, string host = "https://lighthouse.lbpunion.com")
     {
         // Set the base address of the HTTP Client.
