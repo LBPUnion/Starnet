@@ -3,7 +3,7 @@ using Xunit;
 
 namespace LBPUnion.Starnet.Tests.Integration;
 
-[Trait("Category", "Unit")]
+[Trait("Category", "Integration")]
 public class UserRequestTests
 {
     private readonly LighthouseClient client = new();

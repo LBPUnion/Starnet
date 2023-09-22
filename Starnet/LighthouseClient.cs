@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.Text.Json;
 using JetBrains.Annotations;
 using LBPUnion.Starnet.Exceptions;
+using LBPUnion.Starnet.Types.Entities.Slots;
 using LBPUnion.Starnet.Types.Entities.Users;
 
 namespace LBPUnion.Starnet;
@@ -136,6 +137,7 @@ public class LighthouseClient : IDisposable
     /// <param name="username">String username of the user on the server.</param>
     /// <returns>String invite token</returns>
     /// <exception cref="ApiAuthenticationException">The client is not authenticated, or the API key is invalid.</exception>
+    /// <remarks>Requires a valid API key on the host server.</remarks>
     public async Task<string?> CreateUserInviteTokenAsync(string username)
     {
         // Post a request to create a user invite token.
@@ -150,6 +152,53 @@ public class LighthouseClient : IDisposable
         }
 
         return await userInviteTokenReq.Content.ReadAsStringAsync();
+    }
+
+    #endregion
+
+    #region Slot requests
+
+    /// <summary>
+    ///     Gets a list of slots from the server.
+    /// </summary>
+    /// <param name="limit">Number of slots to retrieve.</param>
+    /// <param name="skip">Number of slots to skip.</param>
+    /// <returns>List of deserialized SlotEntities</returns>
+    public async Task<List<SlotEntity?>?> GetSlotsAsync(int limit = 20, int skip = 0)
+    {
+        // Get the list of slots from the API.
+        HttpResponseMessage slotsReq = await this.httpClient.GetAsync("slots/");
+        if (!slotsReq.IsSuccessStatusCode)
+        {
+            return null; // Return null if the request failed.
+        }
+
+        // Deserialize the list of slots.
+        List<SlotEntity?>? slots = JsonSerializer.Deserialize<List<SlotEntity?>>(await slotsReq.Content.ReadAsStringAsync());
+
+        // Return the list of slots, or null if the list is null.
+        return slots ?? null;
+    }
+
+    /// <summary>
+    ///     Gets a slot from the server.
+    /// </summary>
+    /// <param name="slotId">Numerical ID of the slot on the server</param>
+    /// <returns>Deserialized SlotEntity</returns>
+    public async Task<SlotEntity?> GetSlotAsync(int slotId)
+    {
+        // Get the slot from the API.
+        HttpResponseMessage slotReq = await this.httpClient.GetAsync($"slot/{slotId}");
+        if (!slotReq.IsSuccessStatusCode)
+        {
+            return null; // Return null if the request failed.
+        }
+
+        // Deserialize the slot.
+        SlotEntity? slot = JsonSerializer.Deserialize<SlotEntity?>(await slotReq.Content.ReadAsStringAsync());
+
+        // Return the slot, or null if the slot is null.
+        return slot ?? null;
     }
 
     #endregion
