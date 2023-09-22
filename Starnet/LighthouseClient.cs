@@ -1,10 +1,10 @@
-﻿using System.Net;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using JetBrains.Annotations;
 using LBPUnion.Starnet.Exceptions;
 using LBPUnion.Starnet.Types.Entities.Slots;
+using LBPUnion.Starnet.Types.Entities.Statistics;
 using LBPUnion.Starnet.Types.Entities.Users;
 
 namespace LBPUnion.Starnet;
@@ -43,6 +43,44 @@ public class LighthouseClient : IDisposable
         this.httpClient.Dispose();
         GC.SuppressFinalize(this);
     }
+
+    #region Status requests
+
+    /// <summary>
+    ///     Gets the status of the server.
+    /// </summary>
+    /// <returns>Integer status code</returns>
+    public async Task<int> GetStatusAsync()
+    {
+        HttpResponseMessage statusReq = await this.httpClient.GetAsync("status");
+        return (int)statusReq.StatusCode;
+    }
+
+    #endregion
+
+    #region Statistics requests
+
+    /// <summary>
+    ///     Gets the statistics of the server.
+    /// </summary>
+    /// <returns>Deserialized StatisticsEntity</returns>
+    public async Task<StatisticsEntity?> GetStatisticsAsync()
+    {
+        HttpResponseMessage statisticsReq = await this.httpClient.GetAsync("statistics");
+        if (!statisticsReq.IsSuccessStatusCode)
+        {
+            return null; // Return null if the request failed.
+        }
+
+        // Deserialize the statistics.
+        StatisticsEntity? statistics =
+            JsonSerializer.Deserialize<StatisticsEntity?>(await statisticsReq.Content.ReadAsStringAsync());
+
+        // Return the statistics, or null if the statistics are null.
+        return statistics ?? null;
+    }
+
+    #endregion
 
     #region User requests
 
@@ -143,7 +181,7 @@ public class LighthouseClient : IDisposable
     {
         // Post a request to create a user invite token.
         HttpResponseMessage userInviteTokenReq = await this.httpClient.PostAsync($"user/inviteToken/{username}", null);
-        
+
         // Handle both 403 and 404 errors.
         switch ((int)userInviteTokenReq.StatusCode)
         {
@@ -152,7 +190,7 @@ public class LighthouseClient : IDisposable
             case 404:
                 throw new ApiRegistrationException("Registration is not enabled on this server, or the API key is invalid.");
         }
-        
+
         // Handle any other errors.
         if (!userInviteTokenReq.IsSuccessStatusCode)
         {
@@ -207,16 +245,6 @@ public class LighthouseClient : IDisposable
 
         // Return the slot, or null if the slot is null.
         return slot ?? null;
-    }
-
-    #endregion
-
-    #region Status requests
-
-    public async Task<int> GetStatusAsync()
-    {
-        HttpResponseMessage statusReq = await this.httpClient.GetAsync("status");
-        return (int)statusReq.StatusCode;
     }
 
     #endregion
