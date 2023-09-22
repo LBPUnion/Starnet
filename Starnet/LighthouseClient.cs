@@ -137,6 +137,7 @@ public class LighthouseClient : IDisposable
     /// <param name="username">String username of the user on the server.</param>
     /// <returns>String invite token</returns>
     /// <exception cref="ApiAuthenticationException">The client is not authenticated, or the API key is invalid.</exception>
+    /// <exception cref="ApiRegistrationException">Registration is not enabled on this server, or the API Key is invalid.</exception>
     /// <remarks>Requires a valid API key on the host server.</remarks>
     public async Task<string?> CreateUserInviteTokenAsync(string username)
     {
@@ -174,7 +175,7 @@ public class LighthouseClient : IDisposable
     public async Task<List<SlotEntity?>?> GetSlotsAsync(int limit = 20, int skip = 0)
     {
         // Get the list of slots from the API.
-        HttpResponseMessage slotsReq = await this.httpClient.GetAsync("slots/");
+        HttpResponseMessage slotsReq = await this.httpClient.GetAsync("slots");
         if (!slotsReq.IsSuccessStatusCode)
         {
             return null; // Return null if the request failed.
@@ -206,6 +207,16 @@ public class LighthouseClient : IDisposable
 
         // Return the slot, or null if the slot is null.
         return slot ?? null;
+    }
+
+    #endregion
+
+    #region Status requests
+
+    public async Task<int> GetStatusAsync()
+    {
+        HttpResponseMessage statusReq = await this.httpClient.GetAsync("status");
+        return (int)statusReq.StatusCode;
     }
 
     #endregion
