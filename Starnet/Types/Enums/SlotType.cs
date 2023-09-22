@@ -13,5 +13,5 @@ public enum SlotType
     Unknown2 = 4,
     Pod = 5,
     Local = 6,
-    DLC = 8,    
+    DLC = 8,
 }

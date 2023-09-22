@@ -8,15 +8,15 @@ namespace LBPUnion.Starnet.Types.Entities.Rooms;
 [Serializable]
 public class RoomSlotEntity
 {
-    [JsonPropertyName("slotId")]
-    public int SlotId { get; set; }
-
-    [JsonPropertyName("slotType")]
-    public SlotType SlotType { get; set; }
-
     public static readonly RoomSlotEntity PodSlot = new()
     {
         SlotType = SlotType.Pod,
         SlotId = 0,
     };
+
+    [JsonPropertyName("slotId")]
+    public int SlotId { get; set; }
+
+    [JsonPropertyName("slotType")]
+    public SlotType SlotType { get; set; }
 }

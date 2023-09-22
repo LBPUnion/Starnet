@@ -4,7 +4,7 @@
         <RootNamespace>LBPUnion.Starnet</RootNamespace>
         <AssemblyName>LBPUnion.Starnet</AssemblyName>
     </PropertyGroup>
-    
+
     <PropertyGroup>
         <Title>Starnet</Title>
         <Version>0.1.0</Version>
@@ -15,16 +15,16 @@
         <RepositoryUrl>https://github.com/LBPUnion/Starnet</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
     </PropertyGroup>
-    
+
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <IsPackable>true</IsPackable>
     </PropertyGroup>
-    
+
     <ItemGroup>
-      <PackageReference Include="JetBrains.Annotations" Version="2023.2.0" />
+        <PackageReference Include="JetBrains.Annotations" Version="2023.2.0"/>
     </ItemGroup>
 
 </Project>
