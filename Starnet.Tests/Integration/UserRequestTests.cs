@@ -1,3 +1,4 @@
+using LBPUnion.Starnet.Exceptions;
 using LBPUnion.Starnet.Types.Entities.Users;
 using Xunit;
 
@@ -56,5 +57,14 @@ public class UserRequestTests
 
         Assert.Equal(237, secondResult.UserId);
         Assert.Equal("LittleBigArchive", secondResult.Username);
+    }
+
+    [Fact]
+    public async Task UserRequests_ThrowExceptionWhenAuthenticatingWithInvalidKey()
+    {
+        await Assert.ThrowsAsync<ApiRegistrationException>(async () =>
+        {
+            await this.client.CreateUserInviteTokenAsync("littlebigmolly");
+        });
     }
 }

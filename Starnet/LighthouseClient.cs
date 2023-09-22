@@ -142,10 +142,17 @@ public class LighthouseClient : IDisposable
     {
         // Post a request to create a user invite token.
         HttpResponseMessage userInviteTokenReq = await this.httpClient.PostAsync($"user/inviteToken/{username}", null);
-        if (userInviteTokenReq.StatusCode == HttpStatusCode.Forbidden)
+        
+        // Handle both 403 and 404 errors.
+        switch ((int)userInviteTokenReq.StatusCode)
         {
-            throw new ApiAuthenticationException("Client not authenticated or invalid API key provided");
+            case 403:
+                throw new ApiAuthenticationException("The client is not authenticated, or the API key is invalid.");
+            case 404:
+                throw new ApiRegistrationException("Registration is not enabled on this server, or the API key is invalid.");
         }
+        
+        // Handle any other errors.
         if (!userInviteTokenReq.IsSuccessStatusCode)
         {
             return null; // Return null if the request failed.
