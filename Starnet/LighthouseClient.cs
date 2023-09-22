@@ -135,14 +135,14 @@ public class LighthouseClient : IDisposable
     /// </summary>
     /// <param name="username">String username of the user on the server.</param>
     /// <returns>String invite token</returns>
-    /// <exception cref="AuthenticationFailureException">The client is not authenticated, or the API key is invalid.</exception>
+    /// <exception cref="ApiAuthenticationException">The client is not authenticated, or the API key is invalid.</exception>
     public async Task<string?> CreateUserInviteTokenAsync(string username)
     {
         // Post a request to create a user invite token.
         HttpResponseMessage userInviteTokenReq = await this.httpClient.PostAsync($"user/inviteToken/{username}", null);
         if (userInviteTokenReq.StatusCode == HttpStatusCode.Forbidden)
         {
-            throw new AuthenticationFailureException("Client not authenticated or invalid API key provided");
+            throw new ApiAuthenticationException("Client not authenticated or invalid API key provided");
         }
         if (!userInviteTokenReq.IsSuccessStatusCode)
         {
