@@ -23,9 +23,9 @@ public class LighthouseClient : IDisposable
     /// <summary>
     ///     Initializes a new instance of the <see cref="LighthouseClient" /> class.
     /// </summary>
-    /// <param name="authenticationKey">(optional) API authentication token.</param>
+    /// <param name="authenticationToken">(optional) API authentication token.</param>
     /// <param name="host">(optional) Web address of the host.</param>
-    public LighthouseClient([Optional] string? authenticationKey, string host = "https://lighthouse.lbpunion.com")
+    public LighthouseClient([Optional] string? authenticationToken, string host = "https://lighthouse.lbpunion.com")
     {
         // Set the base address of the HTTP Client.
         this.httpClient.BaseAddress = new Uri($"{host.TrimEnd('/')}/api/v1/");
@@ -34,9 +34,9 @@ public class LighthouseClient : IDisposable
         this.httpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("LighthouseClient", "1.0"));
 
         // Set the authentication key of the HTTP Client, if provided.
-        if (authenticationKey != null)
+        if (authenticationToken != null)
         {
-            this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(authenticationKey);
+            this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(authenticationToken);
         }
     }
 
@@ -78,11 +78,10 @@ public class LighthouseClient : IDisposable
         }
 
         // Deserialize the statistics.
-        StatisticsEntity? statistics =
-            JsonSerializer.Deserialize<StatisticsEntity?>(await statisticsReq.Content.ReadAsStringAsync());
+        StatisticsEntity? stats = JsonSerializer.Deserialize<StatisticsEntity?>(await statisticsReq.Content.ReadAsStringAsync());
 
         // Return the statistics, or null if the statistics are null.
-        return statistics ?? null;
+        return stats ?? null;
     }
 
     #endregion
@@ -146,11 +145,10 @@ public class LighthouseClient : IDisposable
         }
 
         // Deserialize the user.
-        UserStatusEntity? userStatus =
-            JsonSerializer.Deserialize<UserStatusEntity>(await userStatusReq.Content.ReadAsStringAsync());
+        UserStatusEntity? status = JsonSerializer.Deserialize<UserStatusEntity>(await userStatusReq.Content.ReadAsStringAsync());
 
         // Return the user, or null if the user is null.
-        return userStatus ?? null;
+        return status ?? null;
     }
 
     /// <summary>
