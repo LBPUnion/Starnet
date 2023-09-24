@@ -1,0 +1,47 @@
+﻿name: Automatic Staging
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  
+jobs:
+  pack:
+    name: Build and Test Package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout from GitHub
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0.x
+
+      - name: Restore Solution
+        run: dotnet restore
+
+      - name: Run Unit Tests
+        run: dotnet test -c Release --logger "console;verbosity=detailed" Starnet.Tests
+
+      - name: Get Commit Information
+        id: commit
+        run: echo "hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+          
+      - name: Build NuGet Package
+        run: dotnet pack -c Release /p:Version=0 Starnet
+        
+      - name: Prepare Package Artifact
+        run: |
+          mv \
+          ${{ github.workspace }}/Starnet/bin/Release/LBPUnion.Starnet.0.0.0.nupkg \
+          ${{ github.workspace }}/Starnet/bin/Release/LBPUnion.Starnet.debug.${{ steps.commit.outputs.hash }}.nupkg
+          
+      - name: Upload Package Artifact
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: LBPUnion.Starnet.debug.${{ steps.commit.outputs.hash }}.nupkg
+          path: "${{ github.workspace }}/Starnet/bin/Release/LBPUnion.Starnet.debug.${{ steps.commit.outputs.hash }}.nupkg"
+          if-no-files-found: error
+          retention-days: 3
