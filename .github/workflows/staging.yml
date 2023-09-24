@@ -30,18 +30,18 @@ jobs:
         run: echo "hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
           
       - name: Build NuGet Package
-        run: dotnet pack -c Release /p:Version=0 Starnet
+        run: dotnet pack -c Debug /p:Version=0 Starnet
         
       - name: Prepare Package Artifact
         run: |
           mv \
-          ${{ github.workspace }}/Starnet/bin/Release/LBPUnion.Starnet.0.0.0.nupkg \
-          ${{ github.workspace }}/Starnet/bin/Release/LBPUnion.Starnet.debug.${{ steps.commit.outputs.hash }}.nupkg
+          ${{ github.workspace }}/Starnet/bin/Debug/LBPUnion.Starnet.0.0.0.nupkg \
+          ${{ github.workspace }}/Starnet/bin/Debug/LBPUnion.Starnet.debug.${{ steps.commit.outputs.hash }}.nupkg
           
       - name: Upload Package Artifact
         uses: actions/upload-artifact@v3.1.1
         with:
           name: LBPUnion.Starnet.debug.${{ steps.commit.outputs.hash }}.nupkg
-          path: "${{ github.workspace }}/Starnet/bin/Release/LBPUnion.Starnet.debug.${{ steps.commit.outputs.hash }}.nupkg"
+          path: "${{ github.workspace }}/Starnet/bin/Debug/LBPUnion.Starnet.debug.${{ steps.commit.outputs.hash }}.nupkg"
           if-no-files-found: error
           retention-days: 3
