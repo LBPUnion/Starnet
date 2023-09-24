@@ -27,7 +27,7 @@ jobs:
         run: echo "version=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_OUTPUT
 
       - name: Build NuGet Package
-        run: dotnet pack -c Release /p:Version=${{ steps.version.output.version }} Starnet
+        run: dotnet pack -c Release /p:Version=${{ steps.version.outputs.version }} Starnet
 
       - name: Create GitHub Release
         uses: "marvinpinto/action-automatic-releases@latest"
@@ -36,7 +36,7 @@ jobs:
           prerelease: false
           draft: true
           files: |
-            ${{ github.workspace }}/Starnet/bin/Release/LBPUnion.Starnet.${{ steps.version.output.version }}.nupkg
+            ${{ github.workspace }}/Starnet/bin/Release/LBPUnion.Starnet.${{ steps.version.outputs.version }}.nupkg
   nuget:
       name: Release Package to NuGet
       runs-on: ubuntu-latest
@@ -57,11 +57,11 @@ jobs:
           run: echo "version=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_OUTPUT
 
         - name: Build NuGet Package
-          run: dotnet pack -c Release /p:Version=${{ steps.version.output.version }} Starnet
+          run: dotnet pack -c Release /p:Version=${{ steps.version.outputs.version }} Starnet
           
         - name: Create NuGet Release
           run: | 
             dotnet nuget push \
-            ${{ github.workspace }}/Starnet/bin/Release/LBPUnion.Starnet.${{ steps.version.output.version }}.nupkg \
+            ${{ github.workspace }}/Starnet/bin/Release/LBPUnion.Starnet.${{ steps.version.outputs.version }}.nupkg \
             --source https://api.nuget.org/v3/index.json \
             --api-key ${{ secrets.NUGET_TOKEN }}
