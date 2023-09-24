@@ -14,7 +14,7 @@ public static class Program
 {
     // Both of the constructor parameters are optional.
     // Defaults to no API key and https://lighthouse.lbpunion.com.
-    private static readonly LighthouseClient client = new("my-api-key", "https://lighthouse.example.com");
+    private static readonly LighthouseClient client = new("$2a$11$...", "https://lighthouse.example.com");
     
     public static async Task Main(string[] args)
     {
