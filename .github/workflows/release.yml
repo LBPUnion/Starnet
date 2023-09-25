@@ -51,7 +51,8 @@ jobs:
         id: version
         run: echo "version=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_OUTPUT
 
-      - uses: actions/download-artifact@master
+      - name: Download Package Artifact
+        uses: actions/download-artifact@master
         with:
           name: LBPUnion.Starnet.${{ steps.version.outputs.version }}.nupkg
           path: ${{ github.workspace }}/LBPUnion.Starnet.${{ steps.version.outputs.version }}.nupkg
@@ -79,7 +80,8 @@ jobs:
           id: version
           run: echo "version=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_OUTPUT
 
-        - uses: actions/download-artifact@master
+        - name: Download Package Artifact
+          uses: actions/download-artifact@master
           with:
             name: LBPUnion.Starnet.${{ steps.version.outputs.version }}.nupkg
             path: ${{ github.workspace }}/LBPUnion.Starnet.${{ steps.version.outputs.version }}.nupkg
