@@ -33,17 +33,8 @@ public class LighthouseClient : IDisposable
         // Set the user agent of the HTTP Client.
         this.httpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("LighthouseClient", "1.0"));
 
-        // Validate that the host is reachable.
-        if (!this.IsHostReachable())
-        {
-            throw new ApiConnectionException("The server is unreachable. Did you specify the correct host?");
-        }
-
         // Set the authentication key of the HTTP Client, if provided.
-        if (authenticationToken == null)
-        {
-            return;
-        }
+        if (authenticationToken == null) return;
 
         this.httpClient.DefaultRequestHeaders.Authorization = authenticationToken.StartsWith("$")
             ? new AuthenticationHeaderValue(authenticationToken)
@@ -60,12 +51,6 @@ public class LighthouseClient : IDisposable
     }
 
     #region Status requests
-
-    /// <summary>
-    ///     Checks if the host is reachable.
-    /// </summary>
-    /// <returns>Boolean</returns>
-    internal bool IsHostReachable() => this.GetStatusAsync().Result == 200;
 
     /// <summary>
     ///     Gets the status of the server.
