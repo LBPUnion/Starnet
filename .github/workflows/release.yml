@@ -55,7 +55,7 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: LBPUnion.Starnet.${{ steps.version.outputs.version }}.nupkg
-          path: ${{ github.workspace }}/LBPUnion.Starnet.${{ steps.version.outputs.version }}.nupkg
+          path: ${{ github.workspace }}/artifacts
 
       - name: Create GitHub Release
         uses: marvinpinto/action-automatic-releases@latest
@@ -64,7 +64,7 @@ jobs:
           prerelease: false
           draft: true
           files: |
-            ${{ github.workspace }}/LBPUnion.Starnet.${{ steps.version.outputs.version }}.nupkg
+            ${{ github.workspace }}/artifacts/LBPUnion.Starnet.${{ steps.version.outputs.version }}.nupkg
 
   nuget:
       name: Release Package to NuGet
@@ -84,11 +84,11 @@ jobs:
           uses: actions/download-artifact@master
           with:
             name: LBPUnion.Starnet.${{ steps.version.outputs.version }}.nupkg
-            path: ${{ github.workspace }}/LBPUnion.Starnet.${{ steps.version.outputs.version }}.nupkg
+            path: ${{ github.workspace }}/artifacts
 
         - name: Create NuGet Release
           run: | 
             dotnet nuget push \
-            ${{ github.workspace }}/LBPUnion.Starnet.${{ steps.version.outputs.version }}.nupkg \
+            ${{ github.workspace }}/artifacts/LBPUnion.Starnet.${{ steps.version.outputs.version }}.nupkg \
             --source https://api.nuget.org/v3/index.json \
             --api-key ${{ secrets.NUGET_TOKEN }}
