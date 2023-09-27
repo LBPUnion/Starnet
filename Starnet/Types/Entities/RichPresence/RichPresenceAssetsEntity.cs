@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using System.Text.Json.Serialization;
+using JetBrains.Annotations;
 
 namespace LBPUnion.Starnet.Types.Entities.RichPresence;
 
@@ -6,12 +7,27 @@ namespace LBPUnion.Starnet.Types.Entities.RichPresence;
 [Serializable]
 public class RichPresenceAssetsEntity
 {
-    public bool UseApplicationAssets { get; init; }
-    public string? PodAsset { get; init; }
-    public string? MoonAsset { get; init; }
-    public string? RemoteMoonAsset { get; init; }
-    public string? DeveloperAsset { get; init; }
-    public string? DeveloperAdventureAsset { get; init; }
-    public string? DlcAsset { get; init; }
-    public string? FallbackAsset { get; init; }
+    [JsonPropertyName("useApplicationAssets")]
+    public bool UseApplicationAssets { get; set; }
+
+    [JsonPropertyName("podAsset")]
+    public string? PodAsset { get; set; }
+
+    [JsonPropertyName("moonAsset")]
+    public string? MoonAsset { get; set; }
+
+    [JsonPropertyName("remoteMoonAsset")]
+    public string? RemoteMoonAsset { get; set; }
+
+    [JsonPropertyName("developerAsset")]
+    public string? DeveloperAsset { get; set; }
+
+    [JsonPropertyName("developerAdventureAsset")]
+    public string? DeveloperAdventureAsset { get; set; }
+
+    [JsonPropertyName("dlcAsset")]
+    public string? DlcAsset { get; set; }
+
+    [JsonPropertyName("fallbackAsset")]
+    public string? FallbackAsset { get; set; }
 }
