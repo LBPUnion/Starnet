@@ -1,4 +1,5 @@
 ﻿#nullable disable
+
 using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 using LBPUnion.Starnet.Types.Enums;
