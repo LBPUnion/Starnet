@@ -5,8 +5,8 @@ using LBPUnion.Starnet.Types.Enums;
 
 namespace LBPUnion.Starnet.Types.Entities.Users;
 
-[PublicAPI]
 [Serializable]
+[MeansImplicitUse(ImplicitUseTargetFlags.WithMembers)]
 public class UserStatusEntity
 {
     [JsonPropertyName("statusType")]

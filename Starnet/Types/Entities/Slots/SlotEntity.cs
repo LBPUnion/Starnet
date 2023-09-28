@@ -6,8 +6,8 @@ using LBPUnion.Starnet.Types.Enums;
 
 namespace LBPUnion.Starnet.Types.Entities.Slots;
 
-[PublicAPI]
 [Serializable]
+[MeansImplicitUse(ImplicitUseTargetFlags.WithMembers)]
 public class SlotEntity
 {
     [JsonPropertyName("slotId")]

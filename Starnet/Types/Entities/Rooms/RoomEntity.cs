@@ -6,8 +6,8 @@ using LBPUnion.Starnet.Types.Enums;
 
 namespace LBPUnion.Starnet.Types.Entities.Rooms;
 
-[PublicAPI]
 [Serializable]
+[MeansImplicitUse(ImplicitUseTargetFlags.WithMembers)]
 public class RoomEntity
 {
     private int roomId;

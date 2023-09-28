@@ -3,8 +3,8 @@ using JetBrains.Annotations;
 
 namespace LBPUnion.Starnet.Types.Entities.Statistics;
 
-[PublicAPI]
 [Serializable]
+[MeansImplicitUse(ImplicitUseTargetFlags.WithMembers)]
 public class StatisticsEntity
 {
     [JsonPropertyName("recentMatches")]

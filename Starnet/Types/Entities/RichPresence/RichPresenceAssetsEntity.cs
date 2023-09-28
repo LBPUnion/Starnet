@@ -3,8 +3,8 @@ using JetBrains.Annotations;
 
 namespace LBPUnion.Starnet.Types.Entities.RichPresence;
 
-[PublicAPI]
 [Serializable]
+[MeansImplicitUse(ImplicitUseTargetFlags.WithMembers)]
 public class RichPresenceAssetsEntity
 {
     [JsonPropertyName("useApplicationAssets")]

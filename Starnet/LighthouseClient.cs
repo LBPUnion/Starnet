@@ -13,7 +13,7 @@ namespace LBPUnion.Starnet;
 /// <summary>
 ///     Base class for the LighthouseClient.
 /// </summary>
-[PublicAPI]
+[MeansImplicitUse(ImplicitUseTargetFlags.WithMembers)]
 public class LighthouseClient : IDisposable
 {
     /// <summary>

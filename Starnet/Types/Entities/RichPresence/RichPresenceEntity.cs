@@ -6,8 +6,8 @@ using LBPUnion.Starnet.Types.Enums;
 
 namespace LBPUnion.Starnet.Types.Entities.RichPresence;
 
-[PublicAPI]
 [Serializable]
+[MeansImplicitUse(ImplicitUseTargetFlags.WithMembers)]
 public class RichPresenceEntity
 {
     [JsonPropertyName("applicationId")]

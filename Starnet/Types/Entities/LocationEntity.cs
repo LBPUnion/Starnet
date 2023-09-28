@@ -3,8 +3,8 @@ using JetBrains.Annotations;
 
 namespace LBPUnion.Starnet.Types.Entities;
 
-[PublicAPI]
 [Serializable]
+[MeansImplicitUse(ImplicitUseTargetFlags.WithMembers)]
 public class Location
 {
     [JsonPropertyName("x")]
