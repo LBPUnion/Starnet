@@ -20,5 +20,5 @@ public class RichPresenceEntity
     public UsernameType UsernameType { get; set; }
 
     [JsonPropertyName("assets")]
-    public RichPresenceAssetsEntity Assets { get; set; }    
+    public RichPresenceAssetsEntity Assets { get; set; }
 }

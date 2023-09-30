@@ -7,5 +7,5 @@ public class ApiKeyException : Exception
     /// </summary>
     /// <param name="message">Additional information to explain what caused the exception.</param>
     public ApiKeyException(string message) : base(message)
-    { }    
+    { }
 }

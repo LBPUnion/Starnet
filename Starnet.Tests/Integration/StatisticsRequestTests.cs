@@ -7,7 +7,7 @@ namespace LBPUnion.Starnet.Tests.Integration;
 public class StatisticsRequestTests
 {
     private readonly LighthouseClient client = new();
-    
+
     [Fact]
     public async Task StatisticsRequests_CanGetStatistics()
     {

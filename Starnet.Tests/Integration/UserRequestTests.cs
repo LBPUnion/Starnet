@@ -30,7 +30,7 @@ public class UserRequestTests
     }
 
     /// <summary>
-    /// This can't be effectively tested, as the user status is not constant.
+    ///     This can't be effectively tested, as the user status is not constant.
     /// </summary>
     [Fact]
     public async Task UserRequests_CanGetUserStatusById()

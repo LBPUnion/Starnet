@@ -7,7 +7,7 @@ namespace LBPUnion.Starnet.Tests.Integration;
 public class RichPresenceRequestTests
 {
     private readonly LighthouseClient client = new();
-    
+
     [Fact]
     public async Task RichPresenceRequests_CanGetRichPresence()
     {

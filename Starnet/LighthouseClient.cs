@@ -89,6 +89,30 @@ public class LighthouseClient : IDisposable
 
     #endregion
 
+    #region Rich presence requests
+
+    /// <summary>
+    ///     Gets the RPC configuration from the server.
+    /// </summary>
+    /// <returns>Deserialized RichPresenceEntity</returns>
+    public async Task<RichPresenceEntity?> GetRpcConfigurationAsync()
+    {
+        // Get the RPC configuration from the API.
+        HttpResponseMessage rpcReq = await this.httpClient.GetAsync("rpc");
+        if (!rpcReq.IsSuccessStatusCode)
+        {
+            return null; // Return null if the request failed.
+        }
+
+        // Deserialize the RPC configuration.
+        RichPresenceEntity? rpc = JsonSerializer.Deserialize<RichPresenceEntity?>(await rpcReq.Content.ReadAsStringAsync());
+
+        // Return the RPC configuration, or null if the RPC configuration is null.
+        return rpc ?? null;
+    }
+
+    #endregion
+
     #region User requests
 
     /// <summary>
@@ -256,30 +280,6 @@ public class LighthouseClient : IDisposable
 
         // Return the slot, or null if the slot is null.
         return slot ?? null;
-    }
-
-    #endregion
-
-    #region Rich presence requests
-
-    /// <summary>
-    ///     Gets the RPC configuration from the server.
-    /// </summary>
-    /// <returns>Deserialized RichPresenceEntity</returns>
-    public async Task<RichPresenceEntity?> GetRpcConfigurationAsync()
-    {
-        // Get the RPC configuration from the API.
-        HttpResponseMessage rpcReq = await this.httpClient.GetAsync("rpc");
-        if (!rpcReq.IsSuccessStatusCode)
-        {
-            return null; // Return null if the request failed.
-        }
-
-        // Deserialize the RPC configuration.
-        RichPresenceEntity? rpc = JsonSerializer.Deserialize<RichPresenceEntity?>(await rpcReq.Content.ReadAsStringAsync());
-
-        // Return the RPC configuration, or null if the RPC configuration is null.
-        return rpc ?? null;
     }
 
     #endregion
