@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using JetBrains.Annotations;
@@ -182,6 +183,7 @@ public class LighthouseClient : IDisposable
     /// <exception cref="ApiAuthenticationException">The client is not authenticated, or the API key is invalid.</exception>
     /// <exception cref="ApiRegistrationException">Registration is not enabled on this server, or the API Key is invalid.</exception>
     /// <remarks>Requires a valid API key on the host server.</remarks>
+    [SuppressMessage("ReSharper", "UnusedMethodReturnValue.Global")]
     public async Task<string?> CreateUserInviteTokenAsync(string username)
     {
         // Post a request to create a user invite token.
