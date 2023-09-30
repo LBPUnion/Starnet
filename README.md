@@ -3,7 +3,7 @@
 [![Automatic Release](https://github.com/LBPUnion/Starnet/actions/workflows/release.yml/badge.svg)](https://github.com/LBPUnion/Starnet/actions/workflows/release.yml)
 [![Automatic Staging](https://github.com/LBPUnion/Starnet/actions/workflows/staging.yml/badge.svg)](https://github.com/LBPUnion/Starnet/actions/workflows/staging.yml)
 [![CodeQL](https://github.com/LBPUnion/Starnet/actions/workflows/codeql.yml/badge.svg)](https://github.com/LBPUnion/Starnet/actions/workflows/codeql.yml)
-![NuGet Downloads](https://img.shields.io/nuget/dt/LBPUnion.Starnet?label=NuGet%20Downloads)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/LBPUnion.Starnet?label=NuGet%20Downloads)](https://www.nuget.org/packages/LBPUnion.Starnet)
 
 Starnet is a .NET library for interacting with ProjectLighthouse instance APIs.
 
