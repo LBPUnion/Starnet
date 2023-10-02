@@ -2,6 +2,13 @@
 
 Starnet is a .NET library for interacting with ProjectLighthouse instance APIs.
 
+## Library Contents
+
+* `LighthouseClient` class containing asynchronous methods for interacting with a ProjectLighthouse instance's API.
+* Public types (entities and enums) which can be used to write your own code for interacting with an instance's API
+  without needing to model your own types.
+* Public exceptions which can be thrown by the library or external code.
+
 ## Example
 
 ```csharp
