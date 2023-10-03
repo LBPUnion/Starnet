@@ -83,8 +83,8 @@ public class LighthouseClient : IDisposable
         // Deserialize the statistics.
         StatisticsEntity? stats = JsonSerializer.Deserialize<StatisticsEntity?>(await statisticsReq.Content.ReadAsStringAsync());
 
-        // Return the statistics, or null if the statistics are null.
-        return stats ?? null;
+        // Return the statistics. Will return null if the statistics are null.
+        return stats;
     }
 
     #endregion
@@ -107,8 +107,8 @@ public class LighthouseClient : IDisposable
         // Deserialize the RPC configuration.
         RichPresenceEntity? rpc = JsonSerializer.Deserialize<RichPresenceEntity?>(await rpcReq.Content.ReadAsStringAsync());
 
-        // Return the RPC configuration, or null if the RPC configuration is null.
-        return rpc ?? null;
+        // Return the RPC configuration. Will return null if the RPC configuration is null.
+        return rpc;
     }
 
     #endregion
@@ -132,8 +132,8 @@ public class LighthouseClient : IDisposable
         // Deserialize the user.
         UserEntity? user = JsonSerializer.Deserialize<UserEntity>(await userReq.Content.ReadAsStringAsync());
 
-        // Return the user, or null if the user is null.
-        return user ?? null;
+        // Return the user. Will return null if the user is null.
+        return user;
     }
 
     /// <summary>
@@ -153,8 +153,8 @@ public class LighthouseClient : IDisposable
         // Deserialize the user.
         UserEntity? user = JsonSerializer.Deserialize<UserEntity>(await userReq.Content.ReadAsStringAsync());
 
-        // Return the user, or null if the user is null.
-        return user ?? null;
+        // Return the user. Will return null if the user is null.
+        return user;
     }
 
     /// <summary>
@@ -174,8 +174,8 @@ public class LighthouseClient : IDisposable
         // Deserialize the user.
         UserStatusEntity? status = JsonSerializer.Deserialize<UserStatusEntity>(await userStatusReq.Content.ReadAsStringAsync());
 
-        // Return the user, or null if the user is null.
-        return status ?? null;
+        // Return the user status. Will return null if the user status is null.
+        return status;
     }
 
     /// <summary>
@@ -195,8 +195,8 @@ public class LighthouseClient : IDisposable
         // Deserialize the list of users.
         List<UserEntity?>? users = JsonSerializer.Deserialize<List<UserEntity?>>(await userSearchReq.Content.ReadAsStringAsync());
 
-        // Return the list of users, or null if the list is null.
-        return users ?? null;
+        // Return the list of users. Will return null if the list of users is null.
+        return users;
     }
 
     /// <summary>
@@ -257,8 +257,8 @@ public class LighthouseClient : IDisposable
         // Deserialize the list of slots.
         List<SlotEntity?>? slots = JsonSerializer.Deserialize<List<SlotEntity?>>(await slotsReq.Content.ReadAsStringAsync());
 
-        // Return the list of slots, or null if the list is null.
-        return slots ?? null;
+        // Return the list of slots. Will return null if the list of slots is null.
+        return slots;
     }
 
     /// <summary>
@@ -278,8 +278,8 @@ public class LighthouseClient : IDisposable
         // Deserialize the slot.
         SlotEntity? slot = JsonSerializer.Deserialize<SlotEntity?>(await slotReq.Content.ReadAsStringAsync());
 
-        // Return the slot, or null if the slot is null.
-        return slot ?? null;
+        // Return the slot. Will return null if the slot is null.
+        return slot;
     }
 
     #endregion
