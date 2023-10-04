@@ -248,7 +248,7 @@ public class LighthouseClient : IDisposable
     public async Task<List<SlotEntity?>?> GetSlotsAsync(int limit = 20, int skip = 0)
     {
         // Get the list of slots from the API.
-        HttpResponseMessage slotsReq = await this.httpClient.GetAsync("slots");
+        HttpResponseMessage slotsReq = await this.httpClient.GetAsync($"slots?limit={limit}&skip={skip}");
         if (!slotsReq.IsSuccessStatusCode)
         {
             return null; // Return null if the request failed.
