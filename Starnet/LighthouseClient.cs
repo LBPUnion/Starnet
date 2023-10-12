@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
-using System.Text.Json;
 using JetBrains.Annotations;
 using LBPUnion.Starnet.Exceptions;
+using LBPUnion.Starnet.Helpers;
 using LBPUnion.Starnet.Types.Entities.RichPresence;
 using LBPUnion.Starnet.Types.Entities.Slots;
 using LBPUnion.Starnet.Types.Entities.Statistics;
@@ -81,7 +81,7 @@ public class LighthouseClient : IDisposable
         }
 
         // Deserialize the statistics.
-        StatisticsEntity? stats = JsonSerializer.Deserialize<StatisticsEntity?>(await statisticsReq.Content.ReadAsStringAsync());
+        StatisticsEntity? stats = await statisticsReq.DeserializeLighthouseResponse<StatisticsEntity>();
 
         // Return the statistics. Will return null if the statistics are null.
         return stats;
@@ -105,7 +105,7 @@ public class LighthouseClient : IDisposable
         }
 
         // Deserialize the RPC configuration.
-        RichPresenceEntity? rpc = JsonSerializer.Deserialize<RichPresenceEntity?>(await rpcReq.Content.ReadAsStringAsync());
+        RichPresenceEntity? rpc = await rpcReq.DeserializeLighthouseResponse<RichPresenceEntity>();
 
         // Return the RPC configuration. Will return null if the RPC configuration is null.
         return rpc;
@@ -130,7 +130,7 @@ public class LighthouseClient : IDisposable
         }
 
         // Deserialize the user.
-        UserEntity? user = JsonSerializer.Deserialize<UserEntity>(await userReq.Content.ReadAsStringAsync());
+        UserEntity? user = await userReq.DeserializeLighthouseResponse<UserEntity>();
 
         // Return the user. Will return null if the user is null.
         return user;
@@ -151,7 +151,7 @@ public class LighthouseClient : IDisposable
         }
 
         // Deserialize the user.
-        UserEntity? user = JsonSerializer.Deserialize<UserEntity>(await userReq.Content.ReadAsStringAsync());
+        UserEntity? user = await userReq.DeserializeLighthouseResponse<UserEntity>();
 
         // Return the user. Will return null if the user is null.
         return user;
@@ -172,7 +172,7 @@ public class LighthouseClient : IDisposable
         }
 
         // Deserialize the user.
-        UserStatusEntity? status = JsonSerializer.Deserialize<UserStatusEntity>(await userStatusReq.Content.ReadAsStringAsync());
+        UserStatusEntity? status = await userStatusReq.DeserializeLighthouseResponse<UserStatusEntity>();
 
         // Return the user status. Will return null if the user status is null.
         return status;
@@ -193,7 +193,7 @@ public class LighthouseClient : IDisposable
         }
 
         // Deserialize the list of users.
-        List<UserEntity?>? users = JsonSerializer.Deserialize<List<UserEntity?>>(await userSearchReq.Content.ReadAsStringAsync());
+        List<UserEntity?>? users = await userSearchReq.DeserializeLighthouseResponse<List<UserEntity?>>();
 
         // Return the list of users. Will return null if the list of users is null.
         return users;
@@ -255,7 +255,7 @@ public class LighthouseClient : IDisposable
         }
 
         // Deserialize the list of slots.
-        List<SlotEntity?>? slots = JsonSerializer.Deserialize<List<SlotEntity?>>(await slotsReq.Content.ReadAsStringAsync());
+        List<SlotEntity?>? slots = await slotsReq.DeserializeLighthouseResponse<List<SlotEntity?>>();
 
         // Return the list of slots. Will return null if the list of slots is null.
         return slots;
@@ -276,7 +276,7 @@ public class LighthouseClient : IDisposable
         }
 
         // Deserialize the slot.
-        SlotEntity? slot = JsonSerializer.Deserialize<SlotEntity?>(await slotReq.Content.ReadAsStringAsync());
+        SlotEntity? slot = await slotReq.DeserializeLighthouseResponse<SlotEntity>();
 
         // Return the slot. Will return null if the slot is null.
         return slot;
