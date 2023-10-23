@@ -69,7 +69,7 @@ public class UserRequestTests
         });
     }
 
-    [Fact(Skip = "Infinite is running into billing issues at the moment, disabling until it comes back online.")]
+    [Fact]
     public async Task UserRequests_InviteTokenThrowOnAuthenticationIssue()
     {
         await Assert.ThrowsAsync<ApiAuthenticationException>(async () =>
