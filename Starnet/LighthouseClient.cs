@@ -38,7 +38,7 @@ public class LighthouseClient : IDisposable
         // Set the authentication key of the HTTP Client, if provided.
         if (authenticationToken == null) return;
 
-        this.httpClient.DefaultRequestHeaders.Authorization = authenticationToken.StartsWith("$")
+        this.httpClient.DefaultRequestHeaders.Authorization = authenticationToken.StartsWith('$')
             ? new AuthenticationHeaderValue(authenticationToken)
             : throw new ApiKeyException("The format of the API key is invalid.");
     }
